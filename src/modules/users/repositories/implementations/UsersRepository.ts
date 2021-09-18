@@ -46,7 +46,14 @@ class UsersRepository implements IUsersRepository {
   }
 
   turnAdmin(receivedUser: User): User {
-    // complete
+    const user = { ...receivedUser, admin: true, updated_at: new Date() };
+
+    this.users = this.users.map((element) => {
+      if (element.id === user.id) return user;
+      return element;
+    });
+
+    return user;
   }
 
   list(): User[] {
